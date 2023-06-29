@@ -5,19 +5,19 @@ include_once "./classes/cart.php";
 if ($_POST['productId'] != "") {
     $productId = $_POST['productId'];
 
-    // Получаем корзину из сессии
+    // Get cart from session
     $cart = unserialize($_SESSION['cart']);
 
-    // Удаляем товар из корзины
+    // delete cart from session
     $cart->removeProduct($productId);
 
-    // Получаем обновленное общее количество товаров
+    // Get updated total items quantity
     $totalQuantity = $cart->getTotalQuantity();
 
-    // Сохраняем обновленную корзину в сессии
+    // Save updated cart in session
     $_SESSION['cart'] = serialize($cart);
 
-    // Возвращаем данные в формате JSON
+    // Return data in JSON format
     $response = array(
         'status' => 1,
         'cart' => $cart,

@@ -3,18 +3,18 @@ session_start();
 
 include_once "./classes/cart.php";
 
-// Создаем экземпляр корзины
+// Create an instance of a basket.
 if (isset($_SESSION['cart']) && is_string($_SESSION['cart'])) {
-    // Если сериализованная строка корзины существует в сессии,
-    // десериализуем ее и создаем объект корзины
+    // If the serialized string of the basket exists in the session,
+    // Unserialize it and create a basket object."
     $cart = unserialize($_SESSION['cart']);
     
     } else {
-    // Если сериализованная строка не существует, создаем новую корзину
+    // If the serialized string does not exist, we create a new basket.
     $cart = new Cart();
 }
 
-// Получаем данные о товаре из POST-запроса
+// Obtain the product data from the POST request.
 if ($_POST['product_id'] != "" & $_POST['quantity']>0) {
     $productId = $_POST['product_id'];
     $productPrice = $_POST['product_price'];
@@ -22,15 +22,15 @@ if ($_POST['product_id'] != "" & $_POST['quantity']>0) {
     $productName = $_POST['product_name'];
     $quantity = $_POST['quantity'];
 
-    // Добавляем товар в корзину
+    // Add the item to the basket.
     $cart->addToCart($productId, $quantity, $productPrice, $productName, $productImage);
-    // Получаем общее количество товаров
-$totalQuantity = $cart->getTotalQuantity();////////////////
-// Сохраняем общее количество товаров в сессии
-$_SESSION['totalQuantity'] = $totalQuantity;
+    //  Obtain the total quantity of items.
+    $totalQuantity = $cart->getTotalQuantity();////////////////
+    // Save the total quantity of items in the session.
+    $_SESSION['totalQuantity'] = $totalQuantity;
 
 
-    // Сериализуем корзину и сохраняем в сессии
+    // Serialize the basket and save it in the session
     $_SESSION['cart'] = serialize($cart);
     $response = array(
         'message' => 'Товар добавлен в корзину',
@@ -41,7 +41,7 @@ $_SESSION['totalQuantity'] = $totalQuantity;
     );
    
     
-    // Выводим данные в формате JSON
+    // Output the data in JSON format.
     header('Content-Type: application/json; charset=utf-8');
  
     echo json_encode($response);

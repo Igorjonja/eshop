@@ -24,7 +24,7 @@ class Payment {
 
 $card='karta';
 $number='3124144';
-$hujumber='**** **** **** 1234';
+$cardnumber='**** **** **** 1234';
 $name='igor';
 $surname='jac';
 

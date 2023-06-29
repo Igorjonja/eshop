@@ -17,32 +17,32 @@ function addToCart(productId, productPrice, productImage, productName, quantity)
   .done(function(response) {
     console.log(response)
     if (response.status == 1) {
-      // Получение количества товаров из JSON-ответа
+      // Obtaining the quantity of items from the JSON response.
     var totalQuantity = 0;
 
-    // Цикл для обращения к каждому элементу quantity
+    // A loop to access each 'quantity' element.
     for (var productId in response.cart.products) {
       var quantity = response.cart.products[productId].quantity;
 
-      // Выполнение необходимых действий с каждым quantity
+      // Performing the necessary actions with each 'quantity'.
       console.log("Product ID:", productId);
       console.log("Quantity:", quantity);
 
-      // Преобразование строки в число, если необходимо
+      // Converting the string to a number
       quantity = parseInt(quantity);
 
-      // Добавление quantity к общему количеству
+      // Adding the quantity to the total quantity.
       totalQuantity += quantity;
     }
 
 
-    // Установка количества товаров в элемент "total-quantyty"
+    // Setting the quantity of items in the 'total-quantity' element.
     console.log(response)
     $('#total-quantyty').text(response.totalQuantity);
     // $('#total-quantyty').text(totalQuantity);
     $('#cart-content').load(location.href+" #cart-content>*")
     } 
-    // Выполнение дополнительных действий, если необходимо
+   
     
   })
   .fail(function(xhr, status, error) {

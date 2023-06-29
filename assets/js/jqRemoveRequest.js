@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    // Обработчик клика на кнопке "delete"
+    // Button click handler "delete"
     $(document).on('click', '.delete-btn', function() {
         var productId = $(this).data('delete-id');
         console.log(productId);

@@ -9,13 +9,13 @@ class Cart {
         
     }
     public function addToCart($productId, $quantity, $productPrice, $productName, $productImage) {
-        // Проверяем, есть ли уже товар с таким ID в корзине
+        // Check if there is already a product with such an ID in the basket
         if (array_key_exists($productId, $this->products)) {
             
-            // Увеличиваем количество товара
+            // Increase the quantity of the product
             $this->products[$productId]['quantity'] += $quantity;
         } else {
-            // Добавляем новый товар в корзину
+            // Add a new item to the basket.
             $this->products[$productId] = array(
                 'quantity' => $quantity,
                 'price' => $productPrice,
@@ -46,12 +46,12 @@ class Cart {
     }
 
     public function displayCart() {
-        // Проверяем, есть ли товары в корзине
+        // Check if there are any items in the basket
         if (!empty($_SESSION['cart'])) {
-            // Десериализуем содержимое корзины
+            // unserialize the contents of the basket.
             $cart = unserialize($_SESSION['cart']);
     
-            // Проверяем, есть ли товары в десериализованной корзине
+            // Check if there are any items in the deserialized basket.
             if (!empty($cart->products)) {
                 echo '<table class="table">';
                 echo '<tr>';
@@ -61,7 +61,7 @@ class Cart {
                 echo '<th>Quantity</th>';
                 echo '</tr>';
     
-                // Проходимся по товарам в корзине
+                //  Iterate over the items in the basket.
                 foreach ($cart->products as $productId => $product) {
                     $productName = $product['name'];
                     $productPrice = $product['price'];
@@ -73,7 +73,7 @@ class Cart {
                     echo '<td>' . $productName . '</td>';
                     echo '<td>$' . $productPrice . '</td>';
                     echo '<td>' . $quantity . '</td>';
-                    echo '<td><button class="delete-btn" data-delete-id="'.$productId.'">delete</button></td>';
+                    echo '<td><button class="delete-btn" data-delete-id="'.$productId.'" >delete</button></td>';
                     echo '</tr>';
                 }
                 echo '</table>';

@@ -77,7 +77,7 @@ include_once "./classes/cart.php";
 
     <div id="cart-content" class="container">
 
-        <? $cart = new Cart(); // Создаем объект корзины
+        <? $cart = new Cart(); // Create a basket object.
         $cart->displayCart(); 
         
         
